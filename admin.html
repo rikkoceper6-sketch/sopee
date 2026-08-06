@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StoreKopiko - Admin Dashboard</title>
+  <title>StoreKopiko Style - Admin Dashboard</title>
   <style>
     * {
       margin: 0;
@@ -13,393 +13,289 @@
     }
 
     body {
-      background-color: #f4f6f9;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background-color: #f5f5f5;
+      color: #222;
     }
 
-    /* Top Header */
     header {
-      background-color: #4a2c11; /* Warna tema khas Kopiko */
-      color: white;
-      padding: 12px 20px;
+      background-color: #ee4d2d;
+      padding: 10px 5%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .menu-toggle {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .logo {
-      color: #ffcc00;
-      font-size: 1.4rem;
+      color: white;
+      font-size: 1.8rem;
       font-weight: bold;
       text-decoration: none;
     }
 
     .btn-user-site {
-      background: #ffcc00;
-      color: #4a2c11;
+      background: white;
+      color: #ee4d2d;
+      border: none;
       padding: 6px 12px;
       font-weight: bold;
-      border-radius: 4px;
+      border-radius: 3px;
       cursor: pointer;
       font-size: 0.85rem;
       text-decoration: none;
     }
 
-    /* Main Container */
-    .admin-wrapper {
-      display: flex;
-      flex: 1;
-      position: relative;
-    }
-
-    /* Sidebar Navigation (Kiri) */
-    .sidebar {
-      width: 250px;
-      background: #ffffff;
-      border-right: 1px solid #e0e0e0;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-      z-index: 999;
-    }
-
-    .sidebar-menu {
-      list-style: none;
-      padding: 10px 0;
-    }
-
-    .sidebar-menu li button {
-      width: 100%;
-      padding: 12px 20px;
-      border: none;
-      background: none;
-      text-align: left;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #555;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .sidebar-menu li button:hover,
-    .sidebar-menu li button.active {
-      background: #fff8e6;
-      color: #4a2c11;
-      border-left: 4px solid #ffcc00;
-    }
-
-    .sidebar-menu li.logout-btn button {
-      color: #d9534f;
-      margin-top: 20px;
-      border-top: 1px solid #eee;
-    }
-
-    /* Content Area */
-    .main-content {
-      flex: 1;
-      padding: 20px;
-      overflow-x: auto;
-    }
-
-    .card {
+    .admin-container {
+      max-width: 1100px;
+      margin: 30px auto;
       background: white;
       border-radius: 6px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 20px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
     }
 
-    .card-title {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-      color: #222;
-      border-bottom: 2px solid #ffcc00;
-      padding-bottom: 5px;
-      display: inline-block;
-    }
-
-    /* Tab Filter Laporan Penjualan */
-    .report-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-    }
-
-    .report-tab-btn {
-      padding: 6px 14px;
-      border: 1px solid #ccc;
-      background: #f9f9f9;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: bold;
-    }
-
-    .report-tab-btn.active {
-      background: #4a2c11;
+    .admin-header {
+      background: #333;
       color: white;
-      border-color: #4a2c11;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* Form Styles */
+    .admin-layout {
+      display: flex;
+      min-height: 500px;
+    }
+
+    /* Sidebar Kiri Navigation */
+    .admin-sidebar {
+      width: 220px;
+      background: #2f3542;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-sidebar button {
+      background: none;
+      border: none;
+      color: #f1f2f6;
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 1px solid #3a404d;
+      transition: background 0.2s;
+    }
+
+    .admin-sidebar button:hover, .admin-sidebar button.active {
+      background: #ee4d2d;
+      color: white;
+    }
+
+    .admin-sidebar button.logout-btn {
+      margin-top: auto;
+      background: #d63031;
+    }
+
+    .admin-sidebar button.logout-btn:hover {
+      background: #ff7675;
+    }
+
+    .admin-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
     .admin-form-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .admin-form-group label {
       display: block;
       font-size: 0.85rem;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       font-weight: bold;
-      color: #444;
     }
 
-    .admin-form-group input, 
-    .admin-form-group textarea, 
-    .admin-form-group select {
+    .admin-form-group input, .admin-form-group textarea, .admin-form-group select {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.9rem;
+      border-radius: 3px;
     }
 
     .btn-admin-submit {
-      background: #4a2c11;
-      color: #ffcc00;
+      background: #ee4d2d;
+      color: white;
       border: none;
       padding: 10px 15px;
       font-weight: bold;
-      border-radius: 4px;
+      border-radius: 3px;
       cursor: pointer;
       width: 100%;
-      font-size: 0.9rem;
-    }
-
-    /* Table Styles */
-    .table-responsive {
-      overflow-x: auto;
     }
 
     .admin-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.85rem;
-      background: white;
     }
 
     .admin-table th, .admin-table td {
-      border: 1px solid #e0e0e0;
-      padding: 10px;
+      border: 1px solid #ddd;
+      padding: 8px;
       text-align: left;
     }
 
     .admin-table th {
-      background: #fafafa;
-      color: #333;
+      background: #f8f8f8;
     }
 
-    /* Metric Cards */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .metric-card {
-      background: #fff;
-      padding: 15px;
-      border-radius: 6px;
-      border-left: 4px solid #ffcc00;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .metric-card h5 {
-      font-size: 0.8rem;
-      color: #777;
-      margin-bottom: 5px;
-    }
-
-    .metric-card p {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #222;
-    }
-
-    /* Login Box */
-    .login-container {
-      max-width: 380px;
-      margin: 80px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    .login-box {
+      max-width: 350px;
+      margin: 20px auto;
       text-align: center;
     }
 
-    /* Overlay Mobile */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 998;
+    .sub-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
     }
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
+    .sub-tab-btn {
+      padding: 6px 14px;
+      background: #eee;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 0.85rem;
+      border-radius: 3px;
+    }
 
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: -250px;
-        height: 100%;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      }
-
-      .sidebar.open {
-        left: 0;
-      }
-
-      .sidebar-overlay.active {
-        display: block;
-      }
-
-      .main-content {
-        padding: 15px;
-      }
+    .sub-tab-btn.active {
+      background: #ee4d2d;
+      color: white;
+      border-color: #ee4d2d;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header -->
+  <!-- Header -->
   <header>
-    <div class="header-left">
-      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <a href="index.html" class="logo">☕ StoreKopiko Admin</a>
+    <div class="header-content">
+      <a href="index.html" class="logo">🛒 StoreKopiko Admin</a>
+      <a href="index.html" class="btn-user-site">🏠 Ke Halaman User</a>
     </div>
-    <a href="index.html" class="btn-user-site">🏠 Ke User Site</a>
   </header>
 
-  <!-- Overlay Mobile -->
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-  <!-- Form Login -->
-  <div id="loginView">
-    <div class="login-container">
-      <h3>Login Admin StoreKopiko</h3>
-      <p style="font-size:0.75rem; color:#666; margin: 10px 0 20px;">(User: <b>admin</b> | Pass: <b>1234</b>)</p>
-      <div class="admin-form-group">
-        <input type="text" id="loginUser" placeholder="Username">
-      </div>
-      <div class="admin-form-group">
-        <input type="password" id="loginPass" placeholder="Password">
-      </div>
-      <button class="btn-admin-submit" onclick="handleLogin()">Masuk Dashboard</button>
+  <div class="admin-container">
+    <div class="admin-header">
+      <h3 id="adminHeaderTitle">Login Admin</h3>
     </div>
-  </div>
 
-  <!-- Main Dashboard -->
-  <div id="dashboardView" class="admin-wrapper" style="display: none;">
-    <!-- Sidebar Kiri -->
-    <aside class="sidebar" id="sidebar">
-      <ul class="sidebar-menu">
-        <li><button class="nav-btn active" onclick="switchTab('dashboard', this)">📊 Dashboard</button></li>
-        <li><button class="nav-btn" onclick="switchTab('inputBarang', this)">➕ Input Barang</button></li>
-        <li><button class="nav-btn" onclick="switchTab('viewBarang', this)">📦 View Barang</button></li>
-        <li><button class="nav-btn" onclick="switchTab('flashSale', this)">⚡ Atur Flash Sale</button></li>
-        <li><button class="nav-btn" onclick="switchTab('laporanPenjualan', this)">📈 Laporan Penjualan</button></li>
-        <li class="logout-btn"><button onclick="handleLogout()">🚪 Logout</button></li>
-      </ul>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main class="main-content">
-      
-      <!-- Tab 1: Dashboard -->
-      <div id="tabDashboard" class="tab-content">
-        <div class="card">
-          <h4 class="card-title">Ringkasan Sistem StoreKopiko</h4>
-          <div class="metrics-grid">
-            <div class="metric-card">
-              <h5>TOTAL PRODUK</h5>
-              <p id="totalProductsCount">0</p>
-            </div>
-            <div class="metric-card">
-              <h5>ITEM FLASH SALE ACTIVE</h5>
-              <p id="flashSaleCount">0</p>
-            </div>
-            <div class="metric-card">
-              <h5>TOTAL PENDAPATAN</h5>
-              <p id="totalRevenueVal">Rp 0</p>
-            </div>
-          </div>
+    <!-- Tampilan Form Login -->
+    <div id="loginView" class="admin-content">
+      <div class="login-box">
+        <h4>Silakan Login Admin</h4>
+        <p style="font-size:0.75rem; color:#666; margin-bottom:15px;">(User: <b>admin</b> | Pass: <b>1234</b>)</p>
+        <div class="admin-form-group">
+          <input type="text" id="loginUser" placeholder="Username">
         </div>
-      </div>
-
-      <!-- Tab 2: Input Barang -->
-      <div id="tabInputBarang" class="tab-content" style="display: none;">
-        <div class="card">
-          <h4 class="card-title">Tambah Produk Baru</h4>
-          <div class="admin-form-group">
-            <label>Nama Produk</label>
-            <input type="text" id="newProdName">
-          </div>
-          <div class="admin-form-group">
-            <label>Harga (Rp)</label>
-            <input type="number" id="newProdPrice">
-          </div>
-          <div class="admin-form-group">
-            <label>URL Gambar</label>
-            <input type="text" id="newProdImg" placeholder="https://...">
-          </div>
-          <div class="admin-form-group">
-            <label>Deskripsi</label>
-            <textarea id="newProdDesc" rows="3"></textarea>
-          </div>
-          <button class="btn-admin-submit" onclick="addNewProduct()">+ Simpan Produk</button>
+        <div class="admin-form-group">
+          <input type="password" id="loginPass" placeholder="Password">
         </div>
+        <button class="btn-admin-submit" onclick="handleLogin()">Masuk Dashboard</button>
       </div>
+    </div>
 
-      <!-- Tab 3: View Barang -->
-      <div id="tabViewBarang" class="tab-content" style="display: none;">
-        <div class="card">
-          <h4 class="card-title">Daftar Barang dalam Sistem</h4>
-          <div class="table-responsive">
+    <!-- Tampilan Dashboard dengan Sidebar Navigasi Kiri (Jika Sudah Login) -->
+    <div id="dashboardView" style="display: none;">
+      <div class="admin-layout">
+        <!-- Navigasi Menu Samping Kiri -->
+        <div class="admin-sidebar">
+          <button class="admin-tab active" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+          <button class="admin-tab" onclick="switchTab('inputBarang', this)">➕ Input Barang</button>
+          <button class="admin-tab" onclick="switchTab('flashSale', this)">⚡ Flash Sale</button>
+          <button class="admin-tab" onclick="switchTab('viewBarang', this)">📦 View Barang</button>
+          <button class="admin-tab" onclick="switchTab('laporan', this)">📈 Laporan</button>
+          <button class="admin-tab" onclick="switchTab('omset', this)">💰 Omset (Penarikan)</button>
+          <button class="admin-tab logout-btn" onclick="handleLogout()">🚪 Logout</button>
+        </div>
+
+        <div class="admin-content">
+          <!-- Menu 1: Dashboard -->
+          <div id="tabDashboard">
+            <h4>Ringkasan Toko</h4><br>
+            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+              <div style="flex:1; background:#f0f8ff; border:1px solid #b8daff; padding:15px; border-radius:4px;">
+                <b>Total Produk</b>
+                <p id="dashTotalProd" style="font-size:1.5rem; color:#004085; font-weight:bold;">8</p>
+              </div>
+              <div style="flex:1; background:#d4edda; border:1px solid #c3e6cb; padding:15px; border-radius:4px;">
+                <b>Total Omset</b>
+                <p id="dashTotalOmset" style="font-size:1.5rem; color:#155724; font-weight:bold;">Rp 0</p>
+              </div>
+            </div>
+            <p style="color:#666; font-size:0.9rem;">Selamat datang di Panel Admin StoreKopiko. Silakan pilih menu navigasi di sebelah kiri.</p>
+          </div>
+
+          <!-- Menu 2: Input Barang -->
+          <div id="tabInputBarang" style="display: none;">
+            <h4>Tambah Produk Baru</h4><br>
+            <div class="admin-form-group">
+              <label>Nama Produk</label>
+              <input type="text" id="newProdName">
+            </div>
+            <div class="admin-form-group">
+              <label>Harga (Rp)</label>
+              <input type="number" id="newProdPrice">
+            </div>
+            <div class="admin-form-group">
+              <label>URL Gambar</label>
+              <input type="text" id="newProdImg" placeholder="https://...">
+            </div>
+            <div class="admin-form-group">
+              <label>Deskripsi</label>
+              <textarea id="newProdDesc"></textarea>
+            </div>
+            <div class="admin-form-group">
+              <label>Warna (Pisahkan koma, cth: Merah, Hitam)</label>
+              <input type="text" id="newProdColors" value="Hitam, Putih">
+            </div>
+            <div class="admin-form-group">
+              <label>Ukuran (Pisahkan koma, cth: M, L, XL)</label>
+              <input type="text" id="newProdSizes" value="Standard">
+            </div>
+            <button class="btn-admin-submit" onclick="addNewProduct()">+ Simpan Produk</button>
+          </div>
+
+          <!-- Menu 3: Flash Sale -->
+          <div id="tabFlashSale" style="display: none;">
+            <h4>Pengaturan Flash Sale</h4><br>
+            <div class="admin-form-group">
+              <label>Pilih Produk untuk Flash Sale</label>
+              <select id="flashSaleSelect"></select>
+            </div>
+            <div class="admin-form-group">
+              <label>Harga Flash Sale (Rp)</label>
+              <input type="number" id="flashSalePrice" placeholder="Harga Diskon Promo">
+            </div>
+            <button class="btn-admin-submit" onclick="addFlashSale()">Set Flash Sale</button>
+          </div>
+
+          <!-- Menu 4: View Barang -->
+          <div id="tabViewBarang" style="display: none;">
+            <h4>Daftar Barang dalam Sistem</h4><br>
             <table class="admin-table">
               <thead>
                 <tr>
@@ -412,183 +308,122 @@
               <tbody id="adminProductTable"></tbody>
             </table>
           </div>
-        </div>
-      </div>
 
-      <!-- Tab 4: Flash Sale Manager -->
-      <div id="tabFlashSale" class="tab-content" style="display: none;">
-        <div class="card">
-          <h4 class="card-title">Pengaturan Flash Sale ⚡</h4>
-          <div class="admin-form-group">
-            <label>Pilih Produk</label>
-            <select id="flashSaleProductSelect"></select>
-          </div>
-          <div class="admin-form-group">
-            <label>Diskon (%)</label>
-            <input type="number" id="flashSaleDiscount" min="1" max="99" placeholder="Contoh: 30">
-          </div>
-          <div class="admin-form-group">
-            <label>Durasi Flash Sale (Jam)</label>
-            <input type="number" id="flashSaleDuration" min="1" placeholder="Contoh: 24">
-          </div>
-          <button class="btn-admin-submit" onclick="addFlashSale()">+ Aktifkan Flash Sale</button>
-        </div>
-
-        <div class="card">
-          <h5 style="margin-bottom:10px;">Daftar Flash Sale Aktif</h5>
-          <div class="table-responsive">
+          <!-- Menu 5: Laporan (Harian, Bulanan, Tahunan) -->
+          <div id="tabLaporan" style="display: none;">
+            <h4>Laporan Penjualan & Tracking Resi</h4><br>
+            <div class="sub-tabs">
+              <button class="sub-tab-btn active" onclick="switchLaporan('harian', this)">Harian</button>
+              <button class="sub-tab-btn" onclick="switchLaporan('bulanan', this)">Bulanan</button>
+              <button class="sub-tab-btn" onclick="switchLaporan('tahunan', this)">Tahunan</button>
+            </div>
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>Produk</th>
-                  <th>Harga Asli</th>
-                  <th>Diskon</th>
-                  <th>Harga Promo</th>
-                  <th>Durasi</th>
-                  <th>Aksi</th>
+                  <th>No Resi</th>
+                  <th>Tanggal</th>
+                  <th>Pemesan</th>
+                  <th>Total Bayar</th>
+                  <th>Status Pengiriman</th>
                 </tr>
               </thead>
-              <tbody id="flashSaleTable"></tbody>
+              <tbody id="salesReportTable"></tbody>
             </table>
           </div>
-        </div>
-      </div>
 
-      <!-- Tab 5: Laporan Penjualan (Disatukan) -->
-      <div id="tabLaporanPenjualan" class="tab-content" style="display: none;">
-        <div class="card">
-          <h4 class="card-title">Laporan Penjualan StoreKopiko</h4>
-          
-          <!-- Tab Filter Periode -->
-          <div class="report-tabs">
-            <button class="report-tab-btn active" onclick="switchReportPeriod('harian', this)">Harian</button>
-            <button class="report-tab-btn" onclick="switchReportPeriod('bulanan', this)">Bulanan</button>
-            <button class="report-tab-btn" onclick="switchReportPeriod('tahunan', this)">Tahunan</button>
-          </div>
-
-          <!-- Laporan Harian -->
-          <div id="periodHarian" class="report-sub-content">
-            <div class="table-responsive">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>No Resi</th>
-                    <th>Tanggal</th>
-                    <th>Pemesan</th>
-                    <th>Total Bayar</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody id="dailyReportTable"></tbody>
-              </table>
+          <!-- Menu 6: Omset (Penarikan Uang) -->
+          <div id="tabOmset" style="display: none;">
+            <h4>Omset & Penarikan Saldo</h4><br>
+            <div style="background:#fff3cd; border:1px solid #ffe8a1; padding:15px; border-radius:4px; margin-bottom:15px;">
+              <b>Saldo Omset Tersedia:</b>
+              <h2 id="omsetBalance" style="color:#856404; margin-top:5px;">Rp 0</h2>
             </div>
-          </div>
-
-          <!-- Laporan Bulanan -->
-          <div id="periodBulanan" class="report-sub-content" style="display: none;">
-            <div class="table-responsive">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Bulan / Tahun</th>
-                    <th>Total Transaksi</th>
-                    <th>Total Pendapatan</th>
-                  </tr>
-                </thead>
-                <tbody id="monthlyReportTable"></tbody>
-              </table>
+            <div class="admin-form-group">
+              <label>Jumlah Penarikan (Rp)</label>
+              <input type="number" id="withdrawAmount" placeholder="Masukkan nominal">
             </div>
-          </div>
-
-          <!-- Laporan Tahunan -->
-          <div id="periodTahunan" class="report-sub-content" style="display: none;">
-            <div class="table-responsive">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Tahun</th>
-                    <th>Total Transaksi</th>
-                    <th>Total Pendapatan</th>
-                  </tr>
-                </thead>
-                <tbody id="yearlyReportTable"></tbody>
-              </table>
+            <div class="admin-form-group">
+              <label>Pilih Bank / Rekening Tujuan</label>
+              <select id="withdrawBank">
+                <option>BCA - 1234567890 (a/n StoreKopiko)</option>
+                <option>Mandiri - 0987654321 (a/n StoreKopiko)</option>
+                <option>BRI - 555444333 (a/n StoreKopiko)</option>
+              </select>
             </div>
+            <button class="btn-admin-submit" onclick="processWithdrawal()">Tarik Saldo Uang</button>
           </div>
 
         </div>
       </div>
-
-    </main>
+    </div>
   </div>
 
   <script>
-    // Sample Data Produk
     let products = [
-      { id: 1, name: "Kopi Kopiko 78C Coffee Latte", price: 8000 },
-      { id: 2, name: "Kopiko Candy Pack 150g", price: 12000 },
-      { id: 3, name: "Kopiko Lucky Day 250ml", price: 9500 },
-      { id: 4, name: "Kemeja Oversize StoreKopiko", price: 89000 }
+      { id: 1, name: "Kemeja Oversize Pria Style Korea", price: 89000 },
+      { id: 2, name: "Sepatu Sneaker Casual Sport Import", price: 145000 },
+      { id: 3, name: "Tas Ransel Laptop Waterproof", price: 110000 },
+      { id: 4, name: "Headphone Wireless Extra Bass", price: 230000 },
+      { id: 5, name: "Smartwatch Digital Fitness Tracker", price: 175000 },
+      { id: 6, name: "Kacamata Hitam Polarized UV400", price: 49000 },
+      { id: 7, name: "Botol Minum Tumbler Termos Stainless", price: 65000 },
+      { id: 8, name: "Mouse Gaming Wireless RGB Silent", price: 98000 }
     ];
 
-    // Sample Data Flash Sale
-    let flashSales = [
-      { id: 1, productId: 1, discount: 20, durationHours: 12 }
-    ];
-
-    // Sample Data Penjualan
-    let salesReport = [
-      { resi: "KP-001", date: "2026-08-06", customer: "Budi", total: 24000, status: "Selesai" },
-      { resi: "KP-002", date: "2026-08-06", customer: "Siti", total: 89000, status: "Dikirim" },
-      { resi: "KP-003", date: "2026-07-15", customer: "Andi", total: 12000, status: "Selesai" },
-      { resi: "KP-004", date: "2025-12-20", customer: "Dewi", total: 9500, status: "Selesai" }
-    ];
+    let salesReport = [];
+    let isLoggedIn = false;
+    let availableOmset = 0;
 
     function handleLogin() {
       const u = document.getElementById("loginUser").value;
       const p = document.getElementById("loginPass").value;
 
       if (u === "admin" && p === "1234") {
+        isLoggedIn = true;
         document.getElementById("loginView").style.display = "none";
-        document.getElementById("dashboardView").style.display = "flex";
-        renderAllData();
+        document.getElementById("dashboardView").style.display = "block";
+        document.getElementById("adminHeaderTitle").innerText = "Dashboard Admin - StoreKopiko";
+        renderAdminProductTable();
+        renderSalesReportTable();
+        populateFlashSaleSelect();
+        updateDashboardInfo();
       } else {
         alert("Username/Password Salah! (Gunakan admin / 1234)");
       }
     }
 
     function handleLogout() {
+      isLoggedIn = false;
       document.getElementById("loginView").style.display = "block";
       document.getElementById("dashboardView").style.display = "none";
+      document.getElementById("adminHeaderTitle").innerText = "Login Admin";
       document.getElementById("loginUser").value = "";
       document.getElementById("loginPass").value = "";
     }
 
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("open");
-      document.getElementById("sidebarOverlay").classList.toggle("active");
-    }
-
     function switchTab(tabName, btnEl) {
-      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".admin-tab").forEach(tab => tab.classList.remove("active"));
       if (btnEl) btnEl.classList.add("active");
 
-      document.querySelectorAll(".tab-content").forEach(content => content.style.display = "none");
-
-      const selectedTab = document.getElementById("tab" + tabName.charAt(0).toUpperCase() + tabName.slice(1));
-      if (selectedTab) selectedTab.style.display = "block";
-
-      if (window.innerWidth <= 768) {
-        toggleSidebar();
-      }
+      document.getElementById("tabDashboard").style.display = tabName === 'dashboard' ? 'block' : 'none';
+      document.getElementById("tabInputBarang").style.display = tabName === 'inputBarang' ? 'block' : 'none';
+      document.getElementById("tabFlashSale").style.display = tabName === 'flashSale' ? 'block' : 'none';
+      document.getElementById("tabViewBarang").style.display = tabName === 'viewBarang' ? 'block' : 'none';
+      document.getElementById("tabLaporan").style.display = tabName === 'laporan' ? 'block' : 'none';
+      document.getElementById("tabOmset").style.display = tabName === 'omset' ? 'block' : 'none';
     }
 
-    function switchReportPeriod(period, btnEl) {
-      document.querySelectorAll(".report-tab-btn").forEach(btn => btn.classList.remove("active"));
+    function switchLaporan(tipe, btnEl) {
+      document.querySelectorAll(".sub-tab-btn").forEach(btn => btn.classList.remove("active"));
       if (btnEl) btnEl.classList.add("active");
+      renderSalesReportTable();
+    }
 
-      document.querySelectorAll(".report-sub-content").forEach(c => c.style.display = "none");
-      document.getElementById("period" + period.charAt(0).toUpperCase() + period.slice(1)).style.display = "block";
+    function updateDashboardInfo() {
+      document.getElementById("dashTotalProd").innerText = products.length;
+      availableOmset = salesReport.reduce((sum, r) => sum + r.total, 0);
+      document.getElementById("dashTotalOmset").innerText = `Rp ${availableOmset.toLocaleString('id-ID')}`;
+      document.getElementById("omsetBalance").innerText = `Rp ${availableOmset.toLocaleString('id-ID')}`;
     }
 
     function addNewProduct() {
@@ -601,9 +436,16 @@
       }
 
       const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-      products.push({ id: newId, name: name, price: price });
 
-      renderAllData();
+      products.push({
+        id: newId,
+        name: name,
+        price: price
+      });
+
+      renderAdminProductTable();
+      populateFlashSaleSelect();
+      updateDashboardInfo();
       alert("Produk berhasil ditambahkan!");
       
       document.getElementById("newProdName").value = "";
@@ -615,58 +457,55 @@
     function deleteProduct(id) {
       if (confirm("Yakin ingin menghapus produk ini?")) {
         products = products.filter(p => p.id !== id);
-        flashSales = flashSales.filter(f => f.productId !== id);
-        renderAllData();
+        renderAdminProductTable();
+        populateFlashSaleSelect();
+        updateDashboardInfo();
       }
+    }
+
+    function populateFlashSaleSelect() {
+      const select = document.getElementById("flashSaleSelect");
+      select.innerHTML = products.map(p => `<option value="${p.id}">${p.name} - Rp ${p.price.toLocaleString('id-ID')}</option>`).join('');
     }
 
     function addFlashSale() {
-      const prodId = Number(document.getElementById("flashSaleProductSelect").value);
-      const discount = Number(document.getElementById("flashSaleDiscount").value);
-      const duration = Number(document.getElementById("flashSaleDuration").value);
+      const pId = document.getElementById("flashSaleSelect").value;
+      const fsPrice = document.getElementById("flashSalePrice").value;
+      if (!fsPrice) {
+        alert("Masukkan harga diskon Flash Sale!");
+        return;
+      }
+      const prod = products.find(p => p.id == pId);
+      if (prod) {
+        alert(`Berhasil mengatur Flash Sale untuk ${prod.name} seharga Rp ${Number(fsPrice).toLocaleString('id-ID')}`);
+        document.getElementById("flashSalePrice").value = "";
+      }
+    }
 
-      if (!prodId || !discount || !duration) {
-        alert("Semua field Flash Sale wajib diisi!");
+    function processWithdrawal() {
+      const amount = Number(document.getElementById("withdrawAmount").value);
+      if (!amount || amount <= 0) {
+        alert("Masukkan jumlah penarikan yang valid!");
+        return;
+      }
+      if (amount > availableOmset) {
+        alert("Saldo omset tidak mencukupi!");
         return;
       }
 
-      const exists = flashSales.find(f => f.productId === prodId);
-      if (exists) {
-        alert("Produk ini sudah ada di dalam Flash Sale!");
-        return;
+      availableOmset -= amount;
+      document.getElementById("omsetBalance").innerText = `Rp ${availableOmset.toLocaleString('id-ID')}`;
+      document.getElementById("dashTotalOmset").innerText = `Rp ${availableOmset.toLocaleString('id-ID')}`;
+      alert(`Permintaan penarikan Rp ${amount.toLocaleString('id-ID')} berhasil diproses!`);
+      document.getElementById("withdrawAmount").value = "";
+    }
+
+    function updateOrderStatus(resi, newStatus) {
+      const order = salesReport.find(s => s.resi === resi);
+      if (order) {
+        order.status = newStatus;
+        alert(`Status resi ${resi} diubah menjadi: ${newStatus}`);
       }
-
-      const newFsId = flashSales.length > 0 ? Math.max(...flashSales.map(f => f.id)) + 1 : 1;
-      flashSales.push({ id: newFsId, productId: prodId, discount: discount, durationHours: duration });
-
-      renderFlashSaleTable();
-      renderDashboardMetrics();
-      alert("Flash Sale berhasil diaktifkan!");
-    }
-
-    function removeFlashSale(id) {
-      flashSales = flashSales.filter(f => f.id !== id);
-      renderFlashSaleTable();
-      renderDashboardMetrics();
-    }
-
-    /* Render Logic */
-    function renderAllData() {
-      renderDashboardMetrics();
-      renderAdminProductTable();
-      renderFlashSaleOptions();
-      renderFlashSaleTable();
-      renderDailyReportTable();
-      renderMonthlyReportTable();
-      renderYearlyReportTable();
-    }
-
-    function renderDashboardMetrics() {
-      document.getElementById("totalProductsCount").innerText = products.length;
-      document.getElementById("flashSaleCount").innerText = flashSales.length;
-      
-      const totalRevenue = salesReport.reduce((sum, s) => sum + s.total, 0);
-      document.getElementById("totalRevenueVal").innerText = `Rp ${totalRevenue.toLocaleString('id-ID')}`;
     }
 
     function renderAdminProductTable() {
@@ -681,79 +520,28 @@
       `).join('');
     }
 
-    function renderFlashSaleOptions() {
-      const select = document.getElementById("flashSaleProductSelect");
-      select.innerHTML = products.map(p => `<option value="${p.id}">${p.name} (Rp ${p.price.toLocaleString('id-ID')})</option>`).join('');
-    }
-
-    function renderFlashSaleTable() {
-      const tbody = document.getElementById("flashSaleTable");
-      if (flashSales.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Belum ada item Flash Sale aktif</td></tr>`;
+    function renderSalesReportTable() {
+      const tbody = document.getElementById("salesReportTable");
+      if (salesReport.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Belum ada transaksi checkout</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = flashSales.map(f => {
-        const prod = products.find(p => p.id === f.productId);
-        if (!prod) return '';
-        const promoPrice = prod.price - (prod.price * (f.discount / 100));
-
-        return `
-          <tr>
-            <td><b>${prod.name}</b></td>
-            <td>Rp ${prod.price.toLocaleString('id-ID')}</td>
-            <td><span style="color:red; font-weight:bold;">${f.discount}%</span></td>
-            <td><b>Rp ${promoPrice.toLocaleString('id-ID')}</b></td>
-            <td>${f.durationHours} Jam</td>
-            <td><button style="color:red; cursor:pointer;" onclick="removeFlashSale(${f.id})">Hapus</button></td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function renderDailyReportTable() {
-      const tbody = document.getElementById("dailyReportTable");
       tbody.innerHTML = salesReport.map(r => `
         <tr>
           <td><b>${r.resi}</b></td>
           <td>${r.date}</td>
           <td>${r.customer}</td>
           <td>Rp ${r.total.toLocaleString('id-ID')}</td>
-          <td>${r.status}</td>
+          <td>
+            <select onchange="updateOrderStatus('${r.resi}', this.value)">
+              <option value="Dikemas Toko" ${r.status === 'Dikemas Toko' ? 'selected' : ''}>Dikemas Toko</option>
+              <option value="Dalam Pengiriman Kurir" ${r.status === 'Dalam Pengiriman Kurir' ? 'selected' : ''}>Dalam Pengiriman</option>
+              <option value="Selesai / Terkirim" ${r.status === 'Selesai / Terkirim' ? 'selected' : ''}>Selesai / Terkirim</option>
+            </select>
+          </td>
         </tr>
       `).join('');
-    }
-
-    function renderMonthlyReportTable() {
-      const tbody = document.getElementById("monthlyReportTable");
-      tbody.innerHTML = `
-        <tr>
-          <td>Agustus 2026</td>
-          <td>2</td>
-          <td>Rp 113.000</td>
-        </tr>
-        <tr>
-          <td>Juli 2026</td>
-          <td>1</td>
-          <td>Rp 12.000</td>
-        </tr>
-      `;
-    }
-
-    function renderYearlyReportTable() {
-      const tbody = document.getElementById("yearlyReportTable");
-      tbody.innerHTML = `
-        <tr>
-          <td>2026</td>
-          <td>3</td>
-          <td>Rp 125.000</td>
-        </tr>
-        <tr>
-          <td>2025</td>
-          <td>1</td>
-          <td>Rp 9.500</td>
-        </tr>
-      `;
     }
   </script>
 </body>
