@@ -15,6 +15,7 @@
     body {
       background-color: #f5f5f5;
       color: #222;
+      padding-bottom: 0px;
     }
 
     /* Header */
@@ -102,6 +103,11 @@
       font-weight: bold;
       padding: 2px 6px;
       border-radius: 10px;
+    }
+
+    /* Bottom Navigation Bar Khusus Mobile */
+    .mobile-bottom-nav {
+      display: none;
     }
 
     /* Container Utama */
@@ -687,6 +693,95 @@
       cursor: pointer;
       width: 100%;
     }
+
+    /* ========================================================= */
+    /* PENYESUAIAN TAMPILAN MOBILE VS DASHBOARD (DESKTOP)       */
+    /* ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 60px; /* Jarak untuk Bottom Nav Mobile */
+      }
+
+      .header-content {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+      }
+
+      .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .header-actions {
+        order: 2;
+      }
+
+      /* Sembunyikan beberapa tombol header di mobile karena dipindah ke Bottom Nav */
+      .header-actions .btn-admin, 
+      .header-actions .btn-tracking {
+        display: none;
+      }
+
+      /* Grid 2 kolom khusus layar Smartphone */
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .product-img {
+        height: 140px;
+      }
+
+      .modal-img {
+        width: 100%;
+        height: 200px;
+      }
+
+      /* Bottom Nav Bar Khusus Tampilan Mobile */
+      .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 55px;
+        background: white;
+        border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        z-index: 150;
+      }
+
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        text-decoration: none;
+        font-size: 0.72rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .mobile-nav-item span.icon {
+        font-size: 1.2rem;
+        margin-bottom: 2px;
+      }
+
+      .mobile-nav-item.active {
+        color: #ee4d2d;
+        font-weight: bold;
+      }
+    }
   </style>
 </head>
 <body>
@@ -760,6 +855,26 @@
   <footer>
     <p>&copy; 2026 StoreKopiko Style Store. Hak Cipta Dilindungi Undang-Undang.</p>
   </footer>
+
+  <!-- Navigation Bar khusus Layar Mobile -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item active">
+      <span class="icon">🏠</span>
+      <span>Beranda</span>
+    </a>
+    <button class="mobile-nav-item" onclick="openTrackingModal()">
+      <span class="icon">🚚</span>
+      <span>Lacak</span>
+    </button>
+    <button class="mobile-nav-item" onclick="toggleCart(true)">
+      <span class="icon">🛒</span>
+      <span>Keranjang</span>
+    </button>
+    <a href="admin.html" class="mobile-nav-item">
+      <span class="icon">🔑</span>
+      <span>Admin</span>
+    </a>
+  </div>
 
   <!-- Modal Detail Produk -->
   <div class="modal-detail" id="productModal">
