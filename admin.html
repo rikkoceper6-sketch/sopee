@@ -186,6 +186,46 @@
       color: white;
       border-color: #ee4d2d;
     }
+
+    /* ========================================================= */
+    /* PENYESUAIAN TAMPILAN MOBILE DASHBOARD                    */
+    /* ========================================================= */
+    @media (max-width: 768px) {
+      .admin-container {
+        margin: 10px;
+      }
+
+      .admin-layout {
+        flex-direction: column;
+      }
+
+      /* Merubah Sidebar Kiri Menjadi Tab Horizontal di Mobile */
+      .admin-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .admin-sidebar button {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        border-bottom: none;
+        border-right: 1px solid #3a404d;
+        flex: 1;
+        text-align: center;
+      }
+
+      .admin-sidebar button.logout-btn {
+        margin-top: 0;
+      }
+
+      .admin-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
@@ -236,12 +276,12 @@
           <!-- Menu 1: Dashboard -->
           <div id="tabDashboard">
             <h4>Ringkasan Toko</h4><br>
-            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-              <div style="flex:1; background:#f0f8ff; border:1px solid #b8daff; padding:15px; border-radius:4px;">
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+              <div style="flex:1; min-width: 140px; background:#f0f8ff; border:1px solid #b8daff; padding:15px; border-radius:4px;">
                 <b>Total Produk</b>
                 <p id="dashTotalProd" style="font-size:1.5rem; color:#004085; font-weight:bold;">8</p>
               </div>
-              <div style="flex:1; background:#d4edda; border:1px solid #c3e6cb; padding:15px; border-radius:4px;">
+              <div style="flex:1; min-width: 140px; background:#d4edda; border:1px solid #c3e6cb; padding:15px; border-radius:4px;">
                 <b>Total Omset</b>
                 <p id="dashTotalOmset" style="font-size:1.5rem; color:#155724; font-weight:bold;">Rp 0</p>
               </div>
