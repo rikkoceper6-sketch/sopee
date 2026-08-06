@@ -1,10 +1,9 @@
-[6/8, 10.43] .: https://rikkoceper6-sketch.github.io/sopee/index.html
-[6/8, 11.32] .: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopee Style - Katalog Lengkap</title>
+  <title>StoreKopiko Style - Katalog Lengkap</title>
   <style>
     * {
       margin: 0;
@@ -695,7 +694,7 @@
   <!-- Header -->
   <header>
     <div class="header-content">
-      <a href="index.html" class="logo">🛒 Shopee</a>
+      <a href="index.html" class="logo">🛒 StoreKopiko</a>
       <div class="search-bar">
         <input type="text" placeholder="Cari barang murah...">
         <button>🔍</button>
@@ -716,7 +715,7 @@
     <!-- Banner Promo -->
     <div class="promo-banner">
       <h2>🔥 PROMO SPESIAL MINGGU INI!</h2>
-      <p>Gunakan Voucher <b>SHOPEE20</b> untuk diskon ekstra 20%.</p>
+      <p>Gunakan Voucher <b>STOREKOPIKO20</b> untuk diskon ekstra 20%.</p>
     </div>
 
     <!-- DERETAN PRODUK LENGKAP -->
@@ -759,7 +758,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Shopee Style Store. Hak Cipta Dilindungi Undang-Undang.</p>
+    <p>&copy; 2026 StoreKopiko Style Store. Hak Cipta Dilindungi Undang-Undang.</p>
   </footer>
 
   <!-- Modal Detail Produk -->
@@ -810,9 +809,9 @@
     <div class="drawer-body" id="cartList"></div>
 
     <div class="voucher-box">
-      <label style="font-size: 0.8rem; font-weight: bold; color: #444;">🎟️ Kode Voucher Shopee</label>
+      <label style="font-size: 0.8rem; font-weight: bold; color: #444;">🎟️ Kode Voucher StoreKopiko</label>
       <div class="voucher-input-group">
-        <input type="text" id="voucherCode" placeholder="Coba: SHOPEE20">
+        <input type="text" id="voucherCode" placeholder="Coba: STOREKOPIKO20">
         <button class="btn-apply-voucher" onclick="applyVoucher()">Gunakan</button>
       </div>
       <div class="voucher-status" id="voucherMessage"></div>
@@ -858,13 +857,13 @@
         <input type="radio" name="payMethod" checked>
         <div>
           <b>Transfer Bank BCA</b>
-          <p style="font-size:0.75rem; color:#666;">No. Rek: 8830-1234-5678 a/n Shopee Store</p>
+          <p style="font-size:0.75rem; color:#666;">No. Rek: 8830-1234-5678 a/n StoreKopiko Store</p>
         </div>
       </div>
-      <div class="payment-option" onclick="selectPayment(this, 'E-Wallet ShopeePay / Mandiri')">
+      <div class="payment-option" onclick="selectPayment(this, 'E-Wallet StoreKopikoPay / Mandiri')">
         <input type="radio" name="payMethod">
         <div>
-          <b>ShopeePay / QRIS / E-Wallet</b>
+          <b>StoreKopikoPay / QRIS / E-Wallet</b>
           <p style="font-size:0.75rem; color:#666;">Scan QRIS atau Transfer via App</p>
         </div>
       </div>
@@ -964,7 +963,7 @@
     ];
 
     const validVouchers = {
-      'SHOPEE20': 0.20,
+      'STOREKOPIKO20': 0.20,
       'HEMAT10K': 10000
     };
 
@@ -1122,7 +1121,7 @@
         activeDiscountRate = 0;
         activeDiscountFlat = 0;
         msg.style.color = "#ee4d2d";
-        msg.innerText = "Kode voucher tidak valid! (Coba: SHOPEE20)";
+        msg.innerText = "Kode voucher tidak valid! (Coba: STOREKOPIKO20)";
       }
       updateCartUI();
     }
@@ -1284,7 +1283,7 @@
           </div>
           <div class="timeline-item">
             <div class="timeline-status">Pesanan Telah Diproses & Dikemas</div>
-            <div class="timeline-date">${order.date} - Gudang Shopee</div>
+            <div class="timeline-date">${order.date} - Gudang StoreKopiko</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-status">Pembayaran Dikonfirmasi (${order.method})</div>
