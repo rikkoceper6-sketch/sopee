@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopee Style - Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background-color: #ee4d2d;
+      padding: 10px 5%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn-user-site {
+      background: white;
+      color: #ee4d2d;
+      border: none;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    .admin-container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .admin-header {
+      background: #333;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-nav {
+      display: flex;
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .admin-tab {
+      padding: 10px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .admin-tab.active {
+      background: white;
+      color: #ee4d2d;
+      border-bottom: 2px solid #ee4d2d;
+    }
+
+    .admin-content {
+      padding: 20px;
+    }
+
+    .admin-form-group {
+      margin-bottom: 12px;
+    }
+
+    .admin-form-group label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .admin-form-group input, .admin-form-group textarea, .admin-form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .btn-admin-submit {
+      background: #ee4d2d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .admin-table th, .admin-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .admin-table th {
+      background: #f8f8f8;
+    }
+
+    .login-box {
+      max-width: 350px;
+      margin: 20px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">🛒 Shopee Admin</a>
+      <a href="index.html" class="btn-user-site">🏠 Ke Halaman User</a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <div class="admin-header">
+      <h3 id="adminHeaderTitle">Login Admin</h3>
+    </div>
+
+    <!-- Tampilan Form Login -->
+    <div id="loginView" class="admin-content">
+      <div class="login-box">
+        <h4>Silakan Login Admin</h4>
+        <p style="font-size:0.75rem; color:#666; margin-bottom:15px;">(User: <b>admin</b> | Pass: <b>1234</b>)</p>
+        <div class="admin-form-group">
+          <input type="text" id="loginUser" placeholder="Username">
+        </div>
+        <div class="admin-form-group">
+          <input type="password" id="loginPass" placeholder="Password">
+        </div>
+        <button class="btn-admin-submit" onclick="handleLogin()">Masuk Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Tampilan Dashboard (Jika Sudah Login) -->
+    <div id="dashboardView" style="display: none;">
+      <div class="admin-nav">
+        <button class="admin-tab active" onclick="switchTab('inputBarang', this)">Input Barang</button>
+        <button class="admin-tab" onclick="switchTab('viewBarang', this)">View Barang</button>
+        <button class="admin-tab" onclick="switchTab('laporanPenjualan', this)">Laporan Penjualan</button>
+        <button class="admin-tab" style="margin-left: auto; color: red;" onclick="handleLogout()">Logout</button>
+      </div>
+
+      <div class="admin-content">
+        <!-- Tab 1: Input Barang -->
+        <div id="tabInputBarang">
+          <h4>Tambah Produk Baru</h4><br>
+          <div class="admin-form-group">
+            <label>Nama Produk</label>
+            <input type="text" id="newProdName">
+          </div>
+          <div class="admin-form-group">
+            <label>Harga (Rp)</label>
+            <input type="number" id="newProdPrice">
+          </div>
+          <div class="admin-form-group">
+            <label>URL Gambar</label>
+            <input type="text" id="newProdImg" placeholder="https://...">
+          </div>
+          <div class="admin-form-group">
+            <label>Deskripsi</label>
+            <textarea id="newProdDesc"></textarea>
+          </div>
+          <div class="admin-form-group">
+            <label>Warna (Pisahkan koma, cth: Merah, Hitam)</label>
+            <input type="text" id="newProdColors" value="Hitam, Putih">
+          </div>
+          <div class="admin-form-group">
+            <label>Ukuran (Pisahkan koma, cth: M, L, XL)</label>
+            <input type="text" id="newProdSizes" value="Standard">
+          </div>
+          <button class="btn-admin-submit" onclick="addNewProduct()">+ Simpan Produk</button>
+        </div>
+
+        <!-- Tab 2: View Barang -->
+        <div id="tabViewBarang" style="display: none;">
+          <h4>Daftar Barang dalam Sistem</h4><br>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Tab 3: Laporan Penjualan -->
+        <div id="tabLaporanPenjualan" style="display: none;">
+          <h4>Laporan Riwayat Penjualan & Tracking Resi</h4><br>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>No Resi</th>
+                <th>Tanggal</th>
+                <th>Pemesan</th>
+                <th>Total Bayar</th>
+                <th>Status Pengiriman</th>
+              </tr>
+            </thead>
+            <tbody id="salesReportTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let products = [
+      { id: 1, name: "Kemeja Oversize Pria Style Korea", price: 89000 },
+      { id: 2, name: "Sepatu Sneaker Casual Sport Import", price: 145000 },
+      { id: 3, name: "Tas Ransel Laptop Waterproof", price: 110000 },
+      { id: 4, name: "Headphone Wireless Extra Bass", price: 230000 },
+      { id: 5, name: "Smartwatch Digital Fitness Tracker", price: 175000 },
+      { id: 6, name: "Kacamata Hitam Polarized UV400", price: 49000 },
+      { id: 7, name: "Botol Minum Tumbler Termos Stainless", price: 65000 },
+      { id: 8, name: "Mouse Gaming Wireless RGB Silent", price: 98000 }
+    ];
+
+    let salesReport = [];
+    let isLoggedIn = false;
+
+    function handleLogin() {
+      const u = document.getElementById("loginUser").value;
+      const p = document.getElementById("loginPass").value;
+
+      if (u === "admin" && p === "1234") {
+        isLoggedIn = true;
+        document.getElementById("loginView").style.display = "none";
+        document.getElementById("dashboardView").style.display = "block";
+        document.getElementById("adminHeaderTitle").innerText = "Dashboard Admin";
+        renderAdminProductTable();
+        renderSalesReportTable();
+      } else {
+        alert("Username/Password Salah! (Gunakan admin / 1234)");
+      }
+    }
+
+    function handleLogout() {
+      isLoggedIn = false;
+      document.getElementById("loginView").style.display = "block";
+      document.getElementById("dashboardView").style.display = "none";
+      document.getElementById("adminHeaderTitle").innerText = "Login Admin";
+      document.getElementById("loginUser").value = "";
+      document.getElementById("loginPass").value = "";
+    }
+
+    function switchTab(tabName, btnEl) {
+      document.querySelectorAll(".admin-tab").forEach(tab => tab.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+
+      document.getElementById("tabInputBarang").style.display = tabName === 'inputBarang' ? 'block' : 'none';
+      document.getElementById("tabViewBarang").style.display = tabName === 'viewBarang' ? 'block' : 'none';
+      document.getElementById("tabLaporanPenjualan").style.display = tabName === 'laporanPenjualan' ? 'block' : 'none';
+    }
+
+    function addNewProduct() {
+      const name = document.getElementById("newProdName").value;
+      const price = Number(document.getElementById("newProdPrice").value);
+
+      if (!name || !price) {
+        alert("Nama dan Harga wajib diisi!");
+        return;
+      }
+
+      const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+
+      products.push({
+        id: newId,
+        name: name,
+        price: price
+      });
+
+      renderAdminProductTable();
+      alert("Produk berhasil ditambahkan!");
+      
+      document.getElementById("newProdName").value = "";
+      document.getElementById("newProdPrice").value = "";
+      document.getElementById("newProdImg").value = "";
+      document.getElementById("newProdDesc").value = "";
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Yakin ingin menghapus produk ini?")) {
+        products = products.filter(p => p.id !== id);
+        renderAdminProductTable();
+      }
+    }
+
+    function updateOrderStatus(resi, newStatus) {
+      const order = salesReport.find(s => s.resi === resi);
+      if (order) {
+        order.status = newStatus;
+        alert(`Status resi ${resi} diubah menjadi: ${newStatus}`);
+      }
+    }
+
+    function renderAdminProductTable() {
+      const tbody = document.getElementById("adminProductTable");
+      tbody.innerHTML = products.map(p => `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>Rp ${p.price.toLocaleString('id-ID')}</td>
+          <td><button style="color:red; cursor:pointer;" onclick="deleteProduct(${p.id})">Hapus</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderSalesReportTable() {
+      const tbody = document.getElementById("salesReportTable");
+      if (salesReport.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Belum ada transaksi checkout</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = salesReport.map(r => `
+        <tr>
+          <td><b>${r.resi}</b></td>
+          <td>${r.date}</td>
+          <td>${r.customer}</td>
+          <td>Rp ${r.total.toLocaleString('id-ID')}</td>
+          <td>
+            <select onchange="updateOrderStatus('${r.resi}', this.value)">
+              <option value="Dikemas Toko" ${r.status === 'Dikemas Toko' ? 'selected' : ''}>Dikemas Toko</option>
+              <option value="Dalam Pengiriman Kurir" ${r.status === 'Dalam Pengiriman Kurir' ? 'selected' : ''}>Dalam Pengiriman</option>
+              <option value="Selesai / Terkirim" ${r.status === 'Selesai / Terkirim' ? 'selected' : ''}>Selesai / Terkirim</option>
+            </select>
+          </td>
+        </tr>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
