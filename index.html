@@ -1359,11 +1359,17 @@
       `;
     }
 
-    /* Admin Panel Handlers */
+    /* Admin Panel Handlers dengan Verifikasi Password */
     function openAdminModal() {
-      renderAdminTable();
-      document.getElementById("adminModal").classList.add("active");
-      document.getElementById("overlay").classList.add("active");
+      const password = prompt("Masukkan Password Admin StoreKopiko:");
+      
+      if (password === "admin123") {
+        renderAdminTable();
+        document.getElementById("adminModal").classList.add("active");
+        document.getElementById("overlay").classList.add("active");
+      } else if (password !== null) {
+        alert("Password salah! Akses ke dashboard admin ditolak.");
+      }
     }
 
     function closeAdminModal() {
