@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopee Style - Katalog Lengkap</title>
+  <title>StoreKopiko - Katalog & Dashboard Admin</title>
   <style>
     * {
       margin: 0;
@@ -644,6 +644,23 @@
     .timeline-date { font-size: 0.75rem; color: #888; }
     .timeline-status { font-size: 0.88rem; font-weight: bold; color: #333; }
 
+    /* Modal Admin Style */
+    .admin-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      max-width: 800px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+      z-index: 204;
+      display: none;
+      overflow: hidden;
+    }
+    .admin-modal.active { display: block; }
+
     .admin-header {
       background: #333;
       color: white;
@@ -655,8 +672,26 @@
 
     .admin-content {
       padding: 20px;
-      max-height: 70vh;
+      max-height: 75vh;
       overflow-y: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .admin-table th, .admin-table td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .admin-table th {
+      background-color: #f2f2f2;
+      color: #333;
     }
 
     .admin-form-group {
@@ -694,14 +729,14 @@
   <!-- Header -->
   <header>
     <div class="header-content">
-      <a href="index.html" class="logo">🛒 Shopee</a>
+      <a href="#" class="logo">☕ StoreKopiko</a>
       <div class="search-bar">
-        <input type="text" placeholder="Cari barang murah...">
+        <input type="text" placeholder="Cari barang murah di StoreKopiko...">
         <button>🔍</button>
       </div>
       <div class="header-actions">
         <button class="btn-tracking" onclick="openTrackingModal()">🚚 Lacak</button>
-        <a href="admin.html" class="btn-admin">🔑 Admin</a>
+        <button class="btn-admin" onclick="openAdminModal()">🔑 Admin</button>
         <div class="cart-btn-wrapper" id="openCart">
           🛒
           <span class="cart-badge" id="cartCount">0</span>
@@ -714,7 +749,7 @@
     
     <!-- Banner Promo -->
     <div class="promo-banner">
-      <h2>🔥 PROMO SPESIAL MINGGU INI!</h2>
+      <h2>🔥 PROMO SPESIAL StoreKopiko!</h2>
       <p>Gunakan Voucher <b>SHOPEE20</b> untuk diskon ekstra 20%.</p>
     </div>
 
@@ -749,7 +784,7 @@
         <div class="feature-icon">💬</div>
         <div class="feature-text">
           <h4>Layanan 24/7</h4>
-          <p>CS siap membantu</p>
+          <p>CS StoreKopiko Siap Membantu</p>
         </div>
       </div>
     </div>
@@ -758,7 +793,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Shopee Style Store. Hak Cipta Dilindungi Undang-Undang.</p>
+    <p>&copy; 2026 StoreKopiko. Hak Cipta Dilindungi Undang-Undang.</p>
   </footer>
 
   <!-- Modal Detail Produk -->
@@ -809,7 +844,7 @@
     <div class="drawer-body" id="cartList"></div>
 
     <div class="voucher-box">
-      <label style="font-size: 0.8rem; font-weight: bold; color: #444;">🎟️ Kode Voucher Shopee</label>
+      <label style="font-size: 0.8rem; font-weight: bold; color: #444;">🎟️ Kode Voucher StoreKopiko</label>
       <div class="voucher-input-group">
         <input type="text" id="voucherCode" placeholder="Coba: SHOPEE20">
         <button class="btn-apply-voucher" onclick="applyVoucher()">Gunakan</button>
@@ -857,7 +892,7 @@
         <input type="radio" name="payMethod" checked>
         <div>
           <b>Transfer Bank BCA</b>
-          <p style="font-size:0.75rem; color:#666;">No. Rek: 8830-1234-5678 a/n Shopee Store</p>
+          <p style="font-size:0.75rem; color:#666;">No. Rek: 8830-1234-5678 a/n StoreKopiko</p>
         </div>
       </div>
       <div class="payment-option" onclick="selectPayment(this, 'E-Wallet ShopeePay / Mandiri')">
@@ -901,8 +936,39 @@
     </div>
   </div>
 
+  <!-- Panel Admin Dashboard Modal -->
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-header">
+      <h3>🔑 Dashboard Admin StoreKopiko</h3>
+      <button class="drawer-close" onclick="closeAdminModal()">&times;</button>
+    </div>
+    <div class="admin-content">
+      <h4 style="margin-bottom:10px;">📋 Laporan Pesanan Masuk</h4>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Resi</th>
+              <th>Pelanggan</th>
+              <th>Telepon</th>
+              <th>Alamat</th>
+              <th>Metode</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="adminSalesTable">
+            <tr>
+              <td colspan="7" style="text-align:center; color:#888;">Belum ada pesanan masuk.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <script>
-    /* Data Produk Lengkap dengan Warna & Ukuran */
+    /* Data Produk Lengkap StoreKopiko */
     let products = [
       { 
         id: 1, name: "Kemeja Oversize Pria Style Korea", price: 89000, 
@@ -1283,7 +1349,7 @@
           </div>
           <div class="timeline-item">
             <div class="timeline-status">Pesanan Telah Diproses & Dikemas</div>
-            <div class="timeline-date">${order.date} - Gudang Shopee</div>
+            <div class="timeline-date">${order.date} - Gudang StoreKopiko</div>
           </div>
           <div class="timeline-item">
             <div class="timeline-status">Pembayaran Dikonfirmasi (${order.method})</div>
@@ -1291,6 +1357,38 @@
           </div>
         </div>
       `;
+    }
+
+    /* Admin Panel Handlers */
+    function openAdminModal() {
+      renderAdminTable();
+      document.getElementById("adminModal").classList.add("active");
+      document.getElementById("overlay").classList.add("active");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.remove("active");
+      document.getElementById("overlay").classList.remove("active");
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById("adminSalesTable");
+      if (salesReport.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#888;">Belum ada pesanan masuk.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = salesReport.map(s => `
+        <tr>
+          <td><b>${s.resi}</b></td>
+          <td>${s.customer}</td>
+          <td>${s.phone}</td>
+          <td>${s.address}</td>
+          <td>${s.method}</td>
+          <td>Rp ${s.total.toLocaleString('id-ID')}</td>
+          <td><span style="color:#ee4d2d; font-weight:bold;">${s.status}</span></td>
+        </tr>
+      `).join('');
     }
 
     function toggleCart(show) {
@@ -1305,6 +1403,7 @@
       closeModal();
       closeCheckoutModal();
       closeTrackingModal();
+      closeAdminModal();
     });
 
     renderProducts();
