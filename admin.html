@@ -103,9 +103,7 @@
             box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
         }
 
-        .btn-logout:active {
-            transform: scale(0.96);
-        }
+        .btn-logout:active { transform: scale(0.96); }
 
         /* CONTAINER GRID LAYOUT */
         .container {
@@ -289,9 +287,7 @@
             padding-right: 4px;
         }
 
-        .product-list-admin::-webkit-scrollbar {
-            width: 5px;
-        }
+        .product-list-admin::-webkit-scrollbar { width: 5px; }
         .product-list-admin::-webkit-scrollbar-thumb {
             background: rgba(255,255,255,0.15);
             border-radius: 10px;
@@ -382,7 +378,7 @@
         .order-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 580px;
+            min-width: 680px;
         }
 
         .order-table th, .order-table td {
@@ -390,6 +386,7 @@
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.06);
             font-size: 0.78rem;
+            vertical-align: top;
         }
 
         .order-table th {
@@ -424,7 +421,18 @@
             display: inline-block;
         }
 
-        /* KEYFRAME ANIMATIONS */
+        .recipient-info {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        .recipient-info span {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -526,7 +534,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Pembeli</th>
+                            <th>Pembeli & Penerima</th>
                             <th>Tanggal</th>
                             <th>Barang</th>
                             <th>Total</th>
@@ -629,11 +637,22 @@
             orders.forEach((ord, index) => {
                 const itemsSummary = ord.items.map(i => `${i.nama} (${i.qty}x)`).join(', ');
                 const paymentMethod = ord.paymentMethod || ord.metodePembayaran || 'Transfer Bank';
+                
+                const recipientName = ord.recipientName || ord.buyerName;
+                const phone = ord.phone || '-';
+                const address = ord.address || '-';
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><strong>#${ord.id}</strong></td>
-                    <td>${ord.buyerName}</td>
+                    <td>
+                        <strong>${ord.buyerName}</strong>
+                        <div class="recipient-info">
+                            👤 Penerima: <span>${recipientName}</span><br>
+                            📞 Telp: <span>${phone}</span><br>
+                            📍 Alamat: <span>${address}</span>
+                        </div>
+                    </td>
                     <td>${ord.date}</td>
                     <td>${itemsSummary}</td>
                     <td style="color:#10b981; font-weight:bold;">Rp ${Number(ord.total).toLocaleString('id-ID')}</td>
