@@ -4,332 +4,342 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetStore Pro - Admin Panel</title>
+    <!-- Import Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #1d4ed8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
             --accent: #06b6d4;
-            --bg-dark: #030712;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-dark: #090d16;
+            --card-bg: rgba(18, 24, 38, 0.85);
+            --card-border: rgba(255, 255, 255, 0.08);
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
-            --input-bg: rgba(3, 7, 18, 0.6);
-            --border-color: rgba(255, 255, 255, 0.08);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        body {
-            background: linear-gradient(-45deg, #030712, #090d16, #0f172a, #050811);
-            background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-light);
-            min-height: 100vh;
-            padding: 20px;
             overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            padding: 12px;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Animated Header Dark */
+        /* HEADER RESPONSIVE */
         header {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            padding: 20px 30px;
+            background: rgba(30, 27, 75, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 18px;
             border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 18px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.5s ease-out;
         }
 
         header h1 {
-            font-size: 1.6rem;
-            z-index: 1;
+            font-size: 1.1rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(to right, #f8fafc, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            gap: 8px;
         }
 
         .admin-badge {
-            background: linear-gradient(135deg, #6366f1, #a855f7);
-            -webkit-text-fill-color: #fff;
-            font-size: 0.75rem;
-            padding: 4px 12px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 10px rgba(236, 72, 153, 0.4);
+            animation: pulseGlow 2s infinite alternate;
         }
 
-        /* Tombol Logout Neon Danger */
         .btn-logout {
-            background: linear-gradient(135deg, #dc2626, #991b1b);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: #fff;
-            border: 1px solid rgba(248, 113, 113, 0.3);
-            padding: 10px 22px;
-            border-radius: 10px;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            font-size: 0.8rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
         }
 
         .btn-logout:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
         }
 
+        .btn-logout:active {
+            transform: scale(0.96);
+        }
+
+        /* CONTAINER GRID LAYOUT */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
-        @media (max-width: 900px) {
+        @media (min-width: 768px) {
             .container {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
             }
+            header h1 { font-size: 1.3rem; }
         }
 
-        /* Glassmorphism Dark Cards */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-            transition: border-color 0.3s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid var(--card-border);
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .card:hover {
-            border-color: rgba(56, 189, 248, 0.3);
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
         .card h2 {
-            font-size: 1.25rem;
-            margin-bottom: 20px;
-            color: #38bdf8;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--accent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 6px;
         }
 
-        /* Form Controls */
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            width: 100%;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
+            font-weight: 600;
             margin-bottom: 6px;
-            color: #cbd5e1;
+            color: var(--text-muted);
         }
 
-        .form-group input[type="text"], 
-        .form-group input[type="number"], 
-        .form-group textarea,
+        .form-group input, 
+        .form-group textarea, 
         .form-group select {
             width: 100%;
-            padding: 11px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--input-bg);
-            color: #f8fafc;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-            background: rgba(3, 7, 18, 0.8);
-        }
-
-        .form-group input::placeholder, .form-group textarea::placeholder {
-            color: #475569;
-        }
-
-        /* Sub-option Tab (Upload vs URL) */
-        .input-toggle {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .toggle-btn {
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .toggle-btn.active {
-            background: #0284c7;
-            color: #fff;
-            border-color: #38bdf8;
-        }
-
-        .file-input {
-            padding: 8px !important;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        /* Style Tombol Aksi */
-        .btn-action {
-            width: 100%;
-            padding: 12px;
-            border: none;
+            max-width: 100%;
+            padding: 10px 14px;
             border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(11, 15, 25, 0.7);
+            color: #fff;
+            outline: none;
+            font-size: 0.85rem;
+            display: block;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+            background: rgba(11, 15, 25, 0.9);
+        }
+
+        .upload-options {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             gap: 8px;
+            width: 100%;
+        }
+
+        input[type="file"] {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            width: 100%;
+            padding: 8px;
+            cursor: pointer;
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #0284c7, #1d4ed8);
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 10px;
             color: #fff;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
             margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.5);
-            background: linear-gradient(135deg, #0369a1, #1e40af);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            filter: brightness(1.1);
         }
+
+        .btn-submit:active { transform: scale(0.98); }
 
         .btn-cancel {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-
-        .btn-cancel:hover {
-            background: rgba(255, 255, 255, 0.1);
+            width: 100%;
+            padding: 10px;
+            background: rgba(100, 116, 139, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            display: none;
+            transition: all 0.2s ease;
         }
 
-        /* Stats Grid Dark */
+        .btn-cancel:hover { background: rgba(100, 116, 139, 0.5); }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .stat-box {
-            background: rgba(3, 7, 18, 0.6);
-            padding: 15px;
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px;
             border-radius: 12px;
-            border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56, 189, 248, 0.3);
+            background: rgba(11, 15, 25, 0.8);
         }
 
         .stat-box h3 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: #38bdf8;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .stat-box p {
-            font-size: 0.8rem;
+            font-size: 0.72rem;
+            font-weight: 600;
             color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Inventory List Dark */
         .product-list-admin {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-height: 440px;
+            gap: 10px;
+            max-height: 300px;
             overflow-y: auto;
-            padding-right: 5px;
+            padding-right: 4px;
         }
 
         .product-list-admin::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
-
         .product-list-admin::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.15);
             border-radius: 10px;
         }
 
         .product-item-admin {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(3, 7, 18, 0.5);
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
+            gap: 10px;
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.25s ease;
         }
 
         .product-item-admin:hover {
-            background: rgba(3, 7, 18, 0.8);
-            border-color: rgba(56, 189, 248, 0.2);
+            background: rgba(11, 15, 25, 0.9);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(4px);
         }
 
-        .product-item-admin img, .product-item-admin video {
-            width: 55px;
-            height: 55px;
+        .product-item-admin img {
+            width: 44px;
+            height: 44px;
             object-fit: cover;
             border-radius: 8px;
+            flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            background: #000;
         }
 
         .product-item-admin .info {
             flex: 1;
+            min-width: 0;
         }
 
         .product-item-admin .info h4 {
-            font-size: 0.95rem;
-            color: #f1f5f9;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .product-item-admin .info p {
-            font-size: 0.85rem;
-            color: #10b981;
+            font-size: 0.78rem;
+            color: var(--success);
             font-weight: 700;
-            margin-top: 2px;
         }
 
         .action-btns {
@@ -337,55 +347,109 @@
             gap: 6px;
         }
 
-        .btn-edit {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            color: #fff;
+        .btn-edit, .btn-delete {
             border: none;
-            padding: 7px 12px;
-            border-radius: 8px;
+            padding: 6px 10px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
-        }
-
-        .btn-edit:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-        }
-
-        .btn-delete {
-            background: linear-gradient(135deg, #dc2626, #991b1b);
+            font-size: 0.72rem;
+            font-weight: 700;
             color: #fff;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+            transition: all 0.2s ease;
         }
 
-        .btn-delete:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+        .btn-edit { 
+            background: var(--warning); 
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
         }
+        .btn-edit:hover { background: #d97706; transform: scale(1.05); }
 
-        .badge-edit-mode {
-            background: #d97706;
-            color: #fff;
-            font-size: 0.7rem;
-            padding: 2px 8px;
+        .btn-delete { 
+            background: var(--danger); 
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+        }
+        .btn-delete:hover { background: #dc2626; transform: scale(1.05); }
+
+        /* TABEL SCROLL KHUSUS PERANGKAT HP */
+        .order-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 580px;
+        }
+
+        .order-table th, .order-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.78rem;
+        }
+
+        .order-table th {
+            color: var(--accent);
+            background: rgba(11, 15, 25, 0.9);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.7rem;
+        }
+
+        .status-select {
+            padding: 5px 8px;
+            border-radius: 6px;
+            background: rgba(11, 15, 25, 0.9);
+            color: #38bdf8;
+            border: 1px solid var(--primary);
+            font-size: 0.72rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .payment-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        /* KEYFRAME ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 8px rgba(236, 72, 153, 0.4); }
+            100% { box-shadow: 0 0 16px rgba(236, 72, 153, 0.8); }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>⚡ GadgetStore Pro <span class="admin-badge">Admin System</span></h1>
+        <h1>⚡ GadgetStore <span class="admin-badge">Admin</span></h1>
         <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
     </header>
 
@@ -393,66 +457,51 @@
         
         <!-- Form Tambah / Edit Produk -->
         <div class="card">
-            <h2 id="formTitle">
-                <span>➕ Tambah Produk Baru</span>
-                <span id="editBadge" class="badge-edit-mode" style="display: none;">Mode Edit</span>
-            </h2>
-            <form id="addProductForm" onsubmit="handleFormSubmit(event)">
+            <h2 id="formTitle">➕ Tambah Produk Baru</h2>
+            <form id="productForm" onsubmit="handleFormSubmit(event)">
                 <input type="hidden" id="editProductId">
-
+                
                 <div class="form-group">
                     <label for="nama">Nama Produk</label>
                     <input type="text" id="nama" placeholder="Contoh: iPad Pro M2" required>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="harga">Harga Produk (Rp)</label>
                     <input type="number" id="harga" placeholder="15000000" required>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="deskripsi">Deskripsi & Spesifikasi Singkat</label>
-                    <textarea id="deskripsi" rows="3" placeholder="Layar 120Hz, RAM 16GB, Chipset M2" required></textarea>
+                    <label for="deskripsi">Deskripsi Singkat</label>
+                    <textarea id="deskripsi" rows="2" placeholder="Spesifikasi & Detail" required></textarea>
                 </div>
-
-                <!-- Opsi Sumber Gambar (URL / Upload File) -->
+                
+                <!-- Upload Gambar -->
                 <div class="form-group">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
-                        <label style="margin:0;">Gambar Produk</label>
-                        <div class="input-toggle">
-                            <button type="button" class="toggle-btn active" id="btnImgUrl" onclick="switchImgInput('url')">Link URL</button>
-                            <button type="button" class="toggle-btn" id="btnImgFile" onclick="switchImgInput('file')">Upload File</button>
-                        </div>
+                    <label>Gambar Produk</label>
+                    <div class="upload-options">
+                        <input type="text" id="gambarUrl" placeholder="Link/URL Gambar">
+                        <input type="file" id="gambarFile" accept="image/*" onchange="convertFileToBase64('gambarFile', 'gambarUrl')">
                     </div>
-                    <input type="text" id="gambarUrl" placeholder="https://images.unsplash.com/photo-...">
-                    <input type="file" id="gambarFile" class="file-input" accept="image/*" style="display: none;">
                 </div>
 
-                <!-- Opsi Sumber Video (YouTube / Upload File Lokal) -->
+                <!-- Upload Video Demo -->
                 <div class="form-group">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
-                        <label style="margin:0;">Video Demo Produk</label>
-                        <div class="input-toggle">
-                            <button type="button" class="toggle-btn active" id="btnVidYt" onclick="switchVidInput('yt')">Link YouTube</button>
-                            <button type="button" class="toggle-btn" id="btnVidFile" onclick="switchVidInput('file')">Upload MP4</button>
-                        </div>
+                    <label>Video Demo Produk</label>
+                    <div class="upload-options">
+                        <input type="text" id="ytVideoUrl" placeholder="Link YouTube / Embed">
+                        <input type="file" id="ytVideoFile" accept="video/*" onchange="convertFileToBase64('ytVideoFile', 'ytVideoUrl')">
                     </div>
-                    <input type="text" id="ytVideo" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                    <input type="file" id="videoFile" class="file-input" accept="video/*" style="display: none;">
                 </div>
 
-                <button type="submit" class="btn-action btn-submit" id="submitBtn">
-                    💾 Simpan Produk ke Database
-                </button>
-                <button type="button" class="btn-action btn-cancel" id="cancelEditBtn" style="display: none;" onclick="resetFormState()">
-                    ✖ Batal Edit
-                </button>
+                <button type="submit" class="btn-submit" id="btnSubmit">Simpan Produk</button>
+                <button type="button" class="btn-cancel" id="btnCancel" onclick="resetForm()">Batal Edit</button>
             </form>
         </div>
 
-        <!-- Dashboard Analytics & Daftar Inventaris -->
+        <!-- Dashboard Analytics & Inventaris -->
         <div class="card">
-            <h2>📊 Analytics & Inventaris Saat Ini</h2>
+            <h2>📊 Analytics & Inventaris</h2>
             
             <div class="stats-grid">
                 <div class="stat-box">
@@ -460,90 +509,65 @@
                     <h3 id="totalProductsCount">0</h3>
                 </div>
                 <div class="stat-box">
-                    <p>Status Server</p>
-                    <h3 style="color:#10b981;">ONLINE</h3>
+                    <p>Total Pesanan</p>
+                    <h3 id="totalOrdersCount" style="color: #ec4899;">0</h3>
                 </div>
             </div>
 
             <h2>📦 Daftar Produk Aktif</h2>
-            <div class="product-list-admin" id="productListAdmin">
-                <!-- Dynamic Items -->
+            <div class="product-list-admin" id="productListAdmin"></div>
+        </div>
+
+        <!-- Kelola Status Pengiriman & Pembayaran -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2>🚚 Kelola Pengiriman & Pembayaran Customer</h2>
+            <div class="order-table-wrapper">
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pembeli</th>
+                            <th>Tanggal</th>
+                            <th>Barang</th>
+                            <th>Total</th>
+                            <th>Metode Bayar</th>
+                            <th>Status Pengiriman</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminOrdersBody"></tbody>
+                </table>
             </div>
         </div>
 
     </div>
 
     <script>
-        let imgSourceType = 'url';
-        let vidSourceType = 'yt';
-
-        // Toggle Input Mode Gambar
-        function switchImgInput(type) {
-            imgSourceType = type;
-            const btnUrl = document.getElementById('btnImgUrl');
-            const btnFile = document.getElementById('btnImgFile');
-            const inputUrl = document.getElementById('gambarUrl');
-            const inputFile = document.getElementById('gambarFile');
-
-            if (type === 'url') {
-                btnUrl.classList.add('active');
-                btnFile.classList.remove('active');
-                inputUrl.style.display = 'block';
-                inputFile.style.display = 'none';
-            } else {
-                btnFile.classList.add('active');
-                btnUrl.classList.remove('active');
-                inputFile.style.display = 'block';
-                inputUrl.style.display = 'none';
+        function convertFileToBase64(fileInputId, targetUrlInputId) {
+            const fileInput = document.getElementById(fileInputId);
+            const targetInput = document.getElementById(targetUrlInputId);
+            
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    targetInput.value = e.target.result;
+                };
+                reader.readAsDataURL(fileInput.files[0]);
             }
         }
 
-        // Toggle Input Mode Video
-        function switchVidInput(type) {
-            vidSourceType = type;
-            const btnYt = document.getElementById('btnVidYt');
-            const btnFile = document.getElementById('btnVidFile');
-            const inputYt = document.getElementById('ytVideo');
-            const inputFile = document.getElementById('videoFile');
-
-            if (type === 'yt') {
-                btnYt.classList.add('active');
-                btnFile.classList.remove('active');
-                inputYt.style.display = 'block';
-                inputFile.style.display = 'none';
-            } else {
-                btnFile.classList.add('active');
-                btnYt.classList.remove('active');
-                inputFile.style.display = 'block';
-                inputYt.style.display = 'none';
-            }
-        }
-
-        // Helper function: Convert YouTube URL to Embed URL
         function formatYouTubeEmbedUrl(url) {
             if (!url) return '';
+            if (url.startsWith('data:video/')) return url;
+
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
             const match = url.match(regExp);
 
             if (match && match[2].length === 11) {
                 return `https://www.youtube.com/embed/${match[2]}`;
-            } else if (url.trim().length === 11) {
-                return `https://www.youtube.com/embed/${url.trim()}`;
             }
             return url;
         }
 
-        // Helper function: Read File as Data URL (Base64)
-        function readFileAsBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // Data Storage
         let products = JSON.parse(localStorage.getItem('gadgetProducts')) || [
             {
                 id: 1,
@@ -551,9 +575,7 @@
                 harga: 12000000,
                 deskripsi: "Layar AMOLED 120Hz, RAM 12GB, Chipset Octa-Core, Kamera 108MP.",
                 gambar: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500",
-                gambarType: "url",
-                ytVideo: "https://www.youtube.com/embed/L_LUpnjgPso",
-                videoType: "yt"
+                ytVideo: "https://www.youtube.com/embed/L_LUpnjgPso"
             },
             {
                 id: 2,
@@ -561,11 +583,11 @@
                 harga: 18500000,
                 deskripsi: "Layar 14 Retina 120Hz, RAM 16GB SSD 512GB, Baterai Tahan 18 Jam.",
                 gambar: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500",
-                gambarType: "url",
-                ytVideo: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                videoType: "yt"
+                ytVideo: "https://www.youtube.com/embed/dQw4w9WgXcQ"
             }
         ];
+
+        let orders = JSON.parse(localStorage.getItem('gadgetOrders')) || [];
 
         function renderAdminProducts() {
             const container = document.getElementById('productListAdmin');
@@ -573,18 +595,18 @@
             container.innerHTML = '';
             countElem.innerText = products.length;
 
-            products.forEach((p) => {
+            products.forEach((p, index) => {
                 const item = document.createElement('div');
                 item.className = 'product-item-admin';
                 item.innerHTML = `
-                    <img src="${p.gambar || 'https://via.placeholder.com/150'}" alt="${p.nama}">
+                    <img src="${p.gambar}" alt="${p.nama}">
                     <div class="info">
                         <h4>${p.nama}</h4>
                         <p>Rp ${Number(p.harga).toLocaleString('id-ID')}</p>
                     </div>
                     <div class="action-btns">
-                        <button class="btn-edit" onclick="startEditProduct(${p.id})">Edit</button>
-                        <button class="btn-delete" onclick="deleteProduct(${p.id})">Hapus</button>
+                        <button class="btn-edit" onclick="editProduct(${p.id})">Edit</button>
+                        <button class="btn-delete" onclick="deleteProduct(${index})">Hapus</button>
                     </div>
                 `;
                 container.appendChild(item);
@@ -593,133 +615,116 @@
             localStorage.setItem('gadgetProducts', JSON.stringify(products));
         }
 
-        async function handleFormSubmit(event) {
+        function renderAdminOrders() {
+            const tbody = document.getElementById('adminOrdersBody');
+            const orderCountElem = document.getElementById('totalOrdersCount');
+            tbody.innerHTML = '';
+            orderCountElem.innerText = orders.length;
+
+            if (orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">Belum ada pesanan masuk.</td></tr>`;
+                return;
+            }
+
+            orders.forEach((ord, index) => {
+                const itemsSummary = ord.items.map(i => `${i.nama} (${i.qty}x)`).join(', ');
+                const paymentMethod = ord.paymentMethod || ord.metodePembayaran || 'Transfer Bank';
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>#${ord.id}</strong></td>
+                    <td>${ord.buyerName}</td>
+                    <td>${ord.date}</td>
+                    <td>${itemsSummary}</td>
+                    <td style="color:#10b981; font-weight:bold;">Rp ${Number(ord.total).toLocaleString('id-ID')}</td>
+                    <td><span class="payment-badge">💳 ${paymentMethod}</span></td>
+                    <td>
+                        <select class="status-select" onchange="updateOrderStatus(${index}, this.value)">
+                            <option value="Sedang Diproses" ${ord.status === 'Sedang Diproses' ? 'selected' : ''}>⏳ Diproses</option>
+                            <option value="Dalam Perjalanan" ${ord.status === 'Dalam Perjalanan' ? 'selected' : ''}>🚚 Perjalanan</option>
+                            <option value="Sudah Sampai" ${ord.status === 'Sudah Sampai' ? 'selected' : ''}>✅ Sampai</option>
+                            <option value="Selesai" ${ord.status === 'Selesai' ? 'selected' : ''}>🎉 Selesai</option>
+                        </select>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateOrderStatus(index, newStatus) {
+            orders[index].status = newStatus;
+            localStorage.setItem('gadgetOrders', JSON.stringify(orders));
+            alert(`Status pesanan #${orders[index].id} diperbarui: ${newStatus}`);
+        }
+
+        function handleFormSubmit(event) {
             event.preventDefault();
-
+            
             const editId = document.getElementById('editProductId').value;
-            const nama = document.getElementById('nama').value;
-            const harga = Number(document.getElementById('harga').value);
-            const deskripsi = document.getElementById('deskripsi').value;
+            let videoInput = document.getElementById('ytVideoUrl').value;
+            videoInput = formatYouTubeEmbedUrl(videoInput);
 
-            // Handle Gambar
-            let gambarFinal = '';
-            if (imgSourceType === 'file') {
-                const fileInput = document.getElementById('gambarFile');
-                if (fileInput.files && fileInput.files[0]) {
-                    gambarFinal = await readFileAsBase64(fileInput.files[0]);
-                } else if (editId) {
-                    const existing = products.find(p => p.id == editId);
-                    gambarFinal = existing ? existing.gambar : '';
-                }
-            } else {
-                gambarFinal = document.getElementById('gambarUrl').value;
-            }
-
-            // Handle Video
-            let videoFinal = '';
-            if (vidSourceType === 'file') {
-                const videoFileInput = document.getElementById('videoFile');
-                if (videoFileInput.files && videoFileInput.files[0]) {
-                    videoFinal = await readFileAsBase64(videoFileInput.files[0]);
-                } else if (editId) {
-                    const existing = products.find(p => p.id == editId);
-                    videoFinal = existing ? existing.ytVideo : '';
-                }
-            } else {
-                videoFinal = formatYouTubeEmbedUrl(document.getElementById('ytVideo').value);
-            }
+            const productData = {
+                id: editId ? Number(editId) : Date.now(),
+                nama: document.getElementById('nama').value,
+                harga: Number(document.getElementById('harga').value),
+                deskripsi: document.getElementById('deskripsi').value,
+                gambar: document.getElementById('gambarUrl').value || 'https://via.placeholder.com/300',
+                ytVideo: videoInput
+            };
 
             if (editId) {
-                // Update Produk Exsisting
-                const idx = products.findIndex(p => p.id == editId);
-                if (idx !== -1) {
-                    products[idx] = {
-                        ...products[idx],
-                        nama,
-                        harga,
-                        deskripsi,
-                        gambar: gambarFinal || products[idx].gambar,
-                        gambarType: imgSourceType,
-                        ytVideo: videoFinal || products[idx].ytVideo,
-                        videoType: vidSourceType
-                    };
+                const index = products.findIndex(p => p.id === Number(editId));
+                if (index !== -1) {
+                    products[index] = productData;
                     alert('Produk berhasil diperbarui!');
                 }
             } else {
-                // Tambah Produk Baru
-                const newProd = {
-                    id: Date.now(),
-                    nama,
-                    harga,
-                    deskripsi,
-                    gambar: gambarFinal || 'https://via.placeholder.com/300',
-                    gambarType: imgSourceType,
-                    ytVideo: videoFinal,
-                    videoType: vidSourceType
-                };
-                products.push(newProd);
-                alert('Produk berhasil ditambahkan!');
+                products.push(productData);
+                alert('Produk baru berhasil ditambahkan!');
             }
 
-            resetFormState();
             renderAdminProducts();
+            resetForm();
         }
 
-        function startEditProduct(id) {
-            const product = products.find(p => p.id == id);
-            if (!product) return;
+        function editProduct(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
 
-            document.getElementById('editProductId').value = product.id;
-            document.getElementById('nama').value = product.nama;
-            document.getElementById('harga').value = product.harga;
-            document.getElementById('deskripsi').value = product.deskripsi;
+            document.getElementById('editProductId').value = prod.id;
+            document.getElementById('nama').value = prod.nama;
+            document.getElementById('harga').value = prod.harga;
+            document.getElementById('deskripsi').value = prod.deskripsi;
+            document.getElementById('gambarUrl').value = prod.gambar;
+            document.getElementById('ytVideoUrl').value = prod.ytVideo;
 
-            // Set Mode Gambar
-            if (product.gambarType === 'file') {
-                switchImgInput('file');
-            } else {
-                switchImgInput('url');
-                document.getElementById('gambarUrl').value = product.gambar || '';
-            }
-
-            // Set Mode Video
-            if (product.videoType === 'file') {
-                switchVidInput('file');
-            } else {
-                switchVidInput('yt');
-                document.getElementById('ytVideo').value = product.ytVideo || '';
-            }
-
-            // Ubah UI Form ke Mode Edit
-            document.getElementById('formTitle').querySelector('span').innerText = '✏️ Edit Produk';
-            document.getElementById('editBadge').style.display = 'inline-block';
-            document.getElementById('submitBtn').innerHTML = '🔄 Perbarui Data Produk';
-            document.getElementById('cancelEditBtn').style.display = 'block';
+            document.getElementById('formTitle').innerText = '✏️ Edit Produk';
+            document.getElementById('btnSubmit').innerText = 'Update Produk';
+            document.getElementById('btnCancel').style.display = 'block';
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function resetFormState() {
-            document.getElementById('addProductForm').reset();
+        function resetForm() {
+            document.getElementById('productForm').reset();
             document.getElementById('editProductId').value = '';
-            document.getElementById('formTitle').querySelector('span').innerText = '➕ Tambah Produk Baru';
-            document.getElementById('editBadge').style.display = 'none';
-            document.getElementById('submitBtn').innerHTML = '💾 Simpan Produk ke Database';
-            document.getElementById('cancelEditBtn').style.display = 'none';
-
-            switchImgInput('url');
-            switchVidInput('yt');
+            document.getElementById('gambarFile').value = '';
+            document.getElementById('ytVideoFile').value = '';
+            document.getElementById('formTitle').innerText = '➕ Tambah Produk Baru';
+            document.getElementById('btnSubmit').innerText = 'Simpan Produk';
+            document.getElementById('btnCancel').style.display = 'none';
         }
 
-        function deleteProduct(id) {
-            if (confirm('Yakin ingin menghapus produk ini?')) {
-                products = products.filter(p => p.id != id);
+        function deleteProduct(index) {
+            if(confirm('Yakin ingin menghapus produk ini?')) {
+                products.splice(index, 1);
                 renderAdminProducts();
             }
         }
 
-        // Initial Render
         renderAdminProducts();
+        renderAdminOrders();
     </script>
 </body>
 </html>
